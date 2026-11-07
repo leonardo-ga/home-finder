@@ -23,10 +23,7 @@ export class HomeCardComponent implements OnChanges {
   @Input({ required: true }) h!: Home;
   @Input() index = 0;
   @Input() selected = false;
-  @Input() compared = false;
   @Output() selectHome = new EventEmitter<Home>();
-  @Output() editHome = new EventEmitter<Home>();
-  @Output() compareHome = new EventEmitter<Home>();
   readonly money = formatMoney;
   photoFailed = false;
   ngOnChanges(changes: SimpleChanges) {

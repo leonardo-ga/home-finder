@@ -1,33 +1,15 @@
 <div class="map-detail">
   <button class="close" (click)="closeDetails.emit()" aria-label="Close home detail">×</button>
-  <div class="eyebrow">A CLOSER LOOK</div>
   <h2>{{ h.title }}</h2>
   <p>{{ h.address }}</p>
   <div class="detail-stats">
     <strong>{{ money(h.price + h.fees) }}<small> / mo incl. fees</small></strong
     ><span>Energy {{ h.energy }}</span>
   </div>
-  <p class="notes">{{ h.notes || 'No notes yet. Add your thoughts after a visit.' }}</p>
-  <div class="commute">
-    <strong>Your everyday journeys</strong
-    ><ng-container *ngFor="let d of destinations"
-      ><a *ngIf="d.address" [href]="route(h, d)" target="_blank" rel="noopener noreferrer"
-        >{{ d.name }} <span>Open route ↗</span></a
-      ></ng-container
-    ><button
-      *ngIf="!destinations[0].address && !destinations[1].address"
-      (click)="configureDestinations.emit()"
-    >
-      ＋ Set your two destinations</button
-    ><small
-      >Route links open Google Maps. Choose Monday and your time there; automatic estimates are not
-      connected yet.</small
-    >
-  </div>
+  <p class="notes">{{ h.notes }}</p>
   <div class="detail-actions">
-    <button (click)="editHome.emit(h)">Edit home</button
-    ><a *ngIf="h.url" [href]="h.url" target="_blank" rel="noopener noreferrer"
+    <a *ngIf="h.url" [href]="h.url" target="_blank" rel="noopener noreferrer"
       >Original listing ↗</a
-    ><button class="danger" (click)="deleteHome.emit(h)">Delete</button>
+    >
   </div>
 </div>

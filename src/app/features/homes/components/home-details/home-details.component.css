@@ -53,39 +53,11 @@
   white-space: pre-wrap;
   line-height: 1.6;
 }
-.commute {
-  border-top: 1px solid var(--line);
-  padding-top: 13px;
-  display: flex;
-  flex-direction: column;
-  gap: 9px;
-  font-size: 12px;
-}
-.commute a {
-  display: flex;
-  justify-content: space-between;
-  text-decoration: none;
-  padding: 8px;
-  background: var(--paper);
-  border-radius: 5px;
-}
-.commute small {
-  font-size: 10px;
-  color: var(--muted);
-  line-height: 1.5;
-}
-.commute button {
-  text-align: left;
-}
 .detail-actions {
   display: flex;
   gap: 10px;
   margin-top: 16px;
   align-items: center;
-  font-size: 11px;
-}
-.detail-actions button {
-  padding: 7px 10px;
   font-size: 11px;
 }
 .detail-actions a {

@@ -19,26 +19,12 @@
       <div class="couch"></div>
       <div class="table"></div>
     </div>
-    <span class="image-label">{{
-      h.id.startsWith('demo-') ? 'EXAMPLE HOME' : 'YOUR SHORTLIST'
-    }}</span
-    ><span class="status-tag">{{ h.status }}</span
-    ><span class="image-caption" *ngIf="!h.photo || photoFailed">{{
-      h.id.startsWith('demo-') ? 'Illustration' : 'No photo added'
-    }}</span>
+    <span class="status-tag">{{ h.status }}</span
+    ><span class="image-caption" *ngIf="!h.photo || photoFailed">No photo added</span>
   </button>
   <div class="card-content">
     <div class="price-row">
-      <strong>{{ money(h.price) }}<small> / month</small></strong
-      ><button
-        class="compare-check"
-        [class.checked]="compared"
-        (click)="compareHome.emit(h)"
-        [attr.aria-label]="'Compare ' + h.title"
-        [attr.aria-pressed]="compared"
-      >
-        {{ compared ? '✓' : '＋' }}
-      </button>
+      <strong>{{ money(h.price) }}<small> / month</small></strong>
     </div>
     <button class="title-button" (click)="selectHome.emit(h)">{{ h.title }}</button>
     <p class="address">⌖ {{ h.address }}</p>
@@ -49,8 +35,7 @@
     <div class="card-bottom">
       <span>{{
         h.outdoor ? 'Outdoor space' : h.elevator ? 'Elevator' : 'Energy class ' + h.energy
-      }}</span
-      ><button (click)="editHome.emit(h)">Edit details ↗</button>
+      }}</span>
     </div>
   </div>
 </article>

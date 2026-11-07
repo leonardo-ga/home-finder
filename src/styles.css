@@ -1,5 +1,4 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap');
-@import './styles/dialogs.css';
 @import './styles/map-markers.css';
 :root {
   --ink: #243d35;
@@ -19,17 +18,11 @@ body {
   font-family: 'DM Sans', sans-serif;
   font-size: 14px;
 }
-button,
-input,
-select,
-textarea {
+button {
   font: inherit;
 }
 button,
-a,
-input,
-select,
-textarea {
+a {
   outline-offset: 4px;
 }
 button {
@@ -49,32 +42,6 @@ button:disabled {
 }
 a {
   color: var(--green);
-}
-.eyebrow {
-  font-size: 10px;
-  letter-spacing: 2px;
-  font-weight: 700;
-  color: #8b977f;
-}
-.primary {
-  background: var(--green);
-  border-color: var(--green);
-  color: white;
-  font-weight: 600;
-  padding: 13px 20px;
-  box-shadow: 0 3px 7px #233b3510;
-}
-.primary:hover {
-  background: #234d3c;
-}
-select,
-input,
-textarea {
-  border: 1px solid var(--line);
-  border-radius: 7px;
-  padding: 11px;
-  background: white;
-  color: var(--ink);
 }
 .list-heading {
   display: flex;
@@ -103,24 +70,11 @@ h2 {
   color: var(--muted);
   font-size: 11px;
 }
-.list-heading select {
-  font-size: 11px;
-  padding: 7px;
-  background: transparent;
-  border: 0;
-  max-width: 150px;
-}
-.danger {
-  color: #a45d4e;
-}
 .empty {
   grid-column: 1/-1;
   text-align: center;
   padding: 65px 20px;
   color: var(--muted);
-}
-.empty > span {
-  font-size: 45px;
 }
 .empty h2 {
   color: var(--ink);
@@ -129,17 +83,9 @@ h2 {
 .empty p {
   line-height: 1.6;
 }
-.empty button {
-  margin-top: 15px;
-}
 button:focus-visible,
 a:focus-visible {
   outline: 3px solid #94b9a1;
-}
-input:focus,
-select:focus,
-textarea:focus {
-  outline: 2px solid #94b9a1;
 }
 ::-webkit-scrollbar {
   width: 5px;
@@ -147,9 +93,4 @@ textarea:focus {
 ::-webkit-scrollbar-thumb {
   background: #d3dbcf;
   border-radius: 5px;
-}
-@media (max-width: 760px) {
-  .eyebrow {
-    font-size: 9px;
-  }
 }

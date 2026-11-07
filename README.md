@@ -1,6 +1,6 @@
 ﻿# Home Finder
 
-A personal, frontend-only property shortlist built with Angular, TypeScript and Leaflet.
+A read-only home catalogue and map built with Angular, TypeScript and Leaflet.
 
 ## Run locally
 
@@ -52,38 +52,23 @@ Review the staged changes before committing. After GitHub Pages finishes publish
 
 If the repository name or hosting path changes, update `production.baseHref` in `angular.json` and rebuild. For a custom domain served at the root, use `/`. See GitHub's [publishing-source instructions](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site).
 
-## Included
+## Catalogue
 
-- Interactive OpenStreetMap map with price pins, selection and fit-to-homes.
-- Add, edit and delete homes, with listing/photo links, coordinates, costs, area, rooms, bathrooms, floor, energy class, amenities, visit status and notes.
-- Search, maximum rent, minimum area, status filtering, and price/area sorting.
-- Compare up to four properties, including rent plus fees and cost per square metre.
-- IndexedDB persistence on this browser/device; JSON backup export and validated replacement import.
-- Two saved commute destinations and Google Maps route links for transit, driving, cycling or walking.
-- Responsive layouts and clearly marked fictional Milan examples that can be removed.
+The sole data source is [home.catalogue.ts](src/app/features/homes/domain/home.catalogue.ts). The application displays the seven selected Immobiliare.it listings, their descriptions and photos, and their positions on an interactive map. Selecting a card or pin opens the property details and original listing link.
 
-## Current scope
+The website has no add, edit, delete, import, or export controls. It does not read or write IndexedDB, local storage, or session storage. Any data saved by previous versions is ignored. Selection is temporary and resets on refresh.
 
-Prices currently represent **monthly rental costs** in euros. Purchase prices and ownership costs are not modeled yet. Property positions are entered manually using latitude/longitude; no geocoding account is required.
+To add, remove, or update a home, edit the catalogue file, run the checks, and build and deploy a new version. Every browser displays the catalogue from that deployed version. Catalogue records are read-only in TypeScript and frozen at runtime.
 
-Automatic Monday-morning travel durations are **not implemented**. Route links open Google Maps, where you can set a departure/arrival date and time. A future routing integration needs a provider, billing/key configuration where required, and possibly a small serverless proxy. Never put a secret API key in frontend source.
+Listing details, photos, and published map positions were verified on **7 November 2026**. See [Catalogue sources](documentation/listings.md). Listings are a static snapshot and do not update automatically. Prices represent monthly rental costs in euros. Automatic commute estimates are not implemented.
 
-There is no backend, login, scraping, or cross-device sync. Browser data can be cleared or evicted: export backups regularly. Import replaces the current shortlist after confirmation. Your home records are not included in the built site or stored in Git.
+## Development
 
-Map tiles require internet access and use the OpenStreetMap public tile service, with attribution. Review its usage policy before larger/public deployment: https://operations.osmfoundation.org/policies/tiles/. Fonts load from Google Fonts with system fallbacks. Optional photo URLs load from their source websites, and route links share the selected origin and destination with Google Maps when opened.
+- Run tests: `npm test`.
+- Check Angular templates without generating a build: `npm exec -- ngc --project tsconfig.json --noEmit`.
+- Check formatting: `npm run format:check`.
+- Apply formatting: `npm run format`.
 
-## Source
+TypeScript strict checks and Angular strict template checks are enabled. See [Architecture](documentation/architecture.md) for component boundaries and data flow.
 
-- `src/app/app.component.ts`: application shell.
-- `src/app/features/homes/domain/`: models, runtime validation and pure business rules.
-- `src/app/features/homes/data-access/`: signal-based feature store.
-- `src/app/features/homes/pages/`: page composition and UI workflows.
-- `src/app/features/homes/components/`: independent cards, map, details, comparison and editors.
-- `src/app/core/storage/`: IndexedDB and file-download adapters.
-- `src/app/shared/`: reusable formatting and modal focus behavior.
-
-See [Architecture](documentation/architecture.md) for dependency rules, persistence guarantees, compatibility, and extension guidance.
-
-Angular 19 was selected for compatibility with the installed Node 18 environment. Upgrade Node and Angular together before a long-lived public deployment.
-
-Run regression tests with `npm test`, check formatting with `npm run format:check`, and apply formatting with `npm run format`. TypeScript strict mode, unused declaration checks, return checks, and Angular strict template checks are enabled. Browser interaction/visual verification could not be completed because browser automation was unavailable in this session.
+Map tiles load from OpenStreetMap, property photos from their original provider, and fonts from Google Fonts. These features require internet access; no routing service or geocoding account is required. The map retains OpenStreetMap attribution. Review the [tile usage policy](https://operations.osmfoundation.org/policies/tiles/) before broader deployment.
