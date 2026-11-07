@@ -1,0 +1,23 @@
+.price-marker {
+  border: 0 !important;
+  background: transparent !important;
+}
+.price-marker span {
+  display: block;
+  background: white;
+  border: 1px solid #d5dfd3;
+  border-radius: 18px;
+  box-shadow: 0 2px 8px #243d3530;
+  text-align: center;
+  padding: 6px 8px;
+  font:
+    bold 12px 'DM Sans',
+    sans-serif;
+  color: #345340;
+}
+.price-marker.active span {
+  background: var(--green);
+  color: white;
+  border-color: var(--green);
+  transform: scale(1.1);
+}

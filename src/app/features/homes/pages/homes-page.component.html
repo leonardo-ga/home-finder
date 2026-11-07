@@ -1,0 +1,166 @@
+﻿<header [attr.inert]="editing || commuteDraft ? '' : null">
+  <a class="brand" href="./"
+    ><span class="brand-icon">⌂</span> homefinder<span class="brand-dot">.</span></a
+  >
+  <nav>
+    <button [class.current]="view === 'explore'" (click)="view = 'explore'">Explore homes</button
+    ><button [class.current]="view === 'compare'" (click)="view = 'compare'">
+      Compare <span class="count">{{ store.comparisonIds().size }}</span>
+    </button>
+  </nav>
+  <div class="header-right">
+    <span class="local-dot"></span><span>Personal workspace</span
+    ><button
+      class="avatar"
+      [disabled]="!store.ready()"
+      (click)="openDestinations()"
+      aria-label="Configure destinations"
+    >
+      ME
+    </button>
+  </div>
+</header>
+<p class="notice loading-notice" *ngIf="!store.ready()" role="status">Loading your workspace…</p>
+<main
+  [attr.inert]="store.ready() && !editing && !commuteDraft ? null : ''"
+  [attr.aria-busy]="!store.ready()"
+>
+  <section class="intro">
+    <div>
+      <div class="eyebrow">YOUR NEXT CHAPTER</div>
+      <h1>A place to call home<span>.</span></h1>
+      <p>Keep your favorites close. Find the one that feels right.</p>
+    </div>
+    <button class="primary" (click)="add()">＋ Add a home</button>
+  </section>
+  <div class="toolbar">
+    <div class="search">
+      <span>⌕</span
+      ><input
+        aria-label="Search homes"
+        [(ngModel)]="query"
+        placeholder="Search by home, neighborhood, or notes..."
+      />
+    </div>
+    <label class="filter"
+      >Budget
+      <input
+        type="number"
+        aria-label="Maximum monthly rent"
+        placeholder="Max €/mo"
+        [(ngModel)]="maxPrice"
+        min="0" /></label
+    ><label class="filter"
+      >Area
+      <input
+        type="number"
+        aria-label="Minimum area"
+        placeholder="Min m²"
+        [(ngModel)]="minSqm"
+        min="0" /></label
+    ><select aria-label="Filter by status" [(ngModel)]="status">
+      <option>All statuses</option>
+      <option *ngFor="let s of statuses">{{ s }}</option></select
+    ><button class="icon-button" (click)="openDestinations()">⚑ Destinations</button>
+  </div>
+  <div class="notice" *ngIf="store.notice()" role="status">
+    {{ store.notice()
+    }}<button (click)="store.dismissNotice()" aria-label="Dismiss message">×</button>
+  </div>
+  <div class="demo" *ngIf="store.demo()">
+    <span
+      >✦ <strong>A little inspiration to start.</strong> These are fictional example homes in Milan.
+      Add your own whenever you’re ready.</span
+    ><button (click)="clearExamples()">Remove examples</button>
+  </div>
+  <section class="workspace" [class.hidden]="view !== 'explore'">
+    <div class="listing-panel">
+      <div class="list-heading">
+        <div>
+          <h2>
+            Your shortlist <span>{{ store.filtered().length }}</span>
+          </h2>
+          <p>A few possibilities. One future home.</p>
+        </div>
+        <select aria-label="Sort homes" [(ngModel)]="sort">
+          <option value="recent">Recently added</option>
+          <option value="price">Price: low to high</option>
+          <option value="size">Largest first</option>
+        </select>
+      </div>
+      <div class="cards">
+        <app-home-card
+          *ngFor="let h of store.filtered(); let i = index; trackBy: trackHome"
+          [h]="h"
+          [index]="i"
+          [selected]="store.selectedId() === h.id"
+          [compared]="store.comparisonIds().has(h.id)"
+          (selectHome)="select($event)"
+          (editHome)="edit($event)"
+          (compareHome)="store.toggleCompare($event.id)"
+        />
+        <div class="empty" *ngIf="!store.filtered().length">
+          <span>⌂</span>
+          <h2>Room for a new possibility</h2>
+          <p>Add your first home or adjust your filters.</p>
+          <button class="primary" (click)="add()">Add a home</button>
+        </div>
+      </div>
+    </div>
+    <app-home-map
+      [homes]="store.filtered()"
+      [selectedId]="store.activeHome()?.id ?? null"
+      [visible]="view === 'explore'"
+      (selectHome)="store.select($event)"
+    >
+      <app-home-details
+        *ngIf="store.activeHome() as h"
+        [h]="h"
+        [destinations]="store.destinations()"
+        [mode]="store.mode()"
+        (closeDetails)="store.select(null)"
+        (configureDestinations)="openDestinations()"
+        (editHome)="edit($event)"
+        (deleteHome)="remove($event)"
+      />
+    </app-home-map>
+  </section>
+  <app-home-comparison
+    *ngIf="view === 'compare'"
+    [compared]="store.compared()"
+    (back)="view = 'explore'"
+    (removeHome)="store.toggleCompare($event)"
+  />
+  <footer>
+    <span
+      ><i class="local-dot"></i> {{ persistenceLabel }} <span class="footer-divider">/</span> Your
+      homes, your own little corner.</span
+    >
+    <div>
+      <button (click)="export()">↓ Export backup</button
+      ><button (click)="fileInput.click()">↑ Import backup</button
+      ><input
+        #fileInput
+        type="file"
+        accept="application/json,.json"
+        hidden
+        (change)="import($event)"
+      />
+    </div>
+  </footer>
+</main>
+<app-home-editor
+  *ngIf="editing"
+  [home]="editing"
+  [error]="editorError"
+  [saving]="saving"
+  (cancel)="closeDialogs()"
+  (saveHome)="save($event)"
+/>
+<app-destinations-editor
+  *ngIf="commuteDraft"
+  [settings]="commuteDraft"
+  [saving]="saving"
+  (cancel)="closeDialogs()"
+  (saveSettings)="saveDestinations($event)"
+/>

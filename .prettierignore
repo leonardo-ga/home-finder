@@ -1,0 +1,5 @@
+docs/
+dist/
+.angular/
+.test-build/
+node_modules/

@@ -1,0 +1,56 @@
+<article class="home-card" [class.selected]="selected">
+  <button
+    class="home-image"
+    [class.scene-two]="index % 3 === 1"
+    [class.scene-three]="index % 3 === 2"
+    (click)="selectHome.emit(h)"
+    [attr.aria-label]="'Show ' + h.title + ' on map'"
+  >
+    <img
+      *ngIf="h.photo && !photoFailed"
+      [src]="h.photo"
+      alt="Property photo"
+      (error)="photoFailed = true"
+      referrerpolicy="no-referrer"
+    />
+    <div *ngIf="!h.photo || photoFailed" class="room-art">
+      <div class="window"></div>
+      <div class="plant">♧</div>
+      <div class="couch"></div>
+      <div class="table"></div>
+    </div>
+    <span class="image-label">{{
+      h.id.startsWith('demo-') ? 'EXAMPLE HOME' : 'YOUR SHORTLIST'
+    }}</span
+    ><span class="status-tag">{{ h.status }}</span
+    ><span class="image-caption" *ngIf="!h.photo || photoFailed">{{
+      h.id.startsWith('demo-') ? 'Illustration' : 'No photo added'
+    }}</span>
+  </button>
+  <div class="card-content">
+    <div class="price-row">
+      <strong>{{ money(h.price) }}<small> / month</small></strong
+      ><button
+        class="compare-check"
+        [class.checked]="compared"
+        (click)="compareHome.emit(h)"
+        [attr.aria-label]="'Compare ' + h.title"
+        [attr.aria-pressed]="compared"
+      >
+        {{ compared ? '✓' : '＋' }}
+      </button>
+    </div>
+    <button class="title-button" (click)="selectHome.emit(h)">{{ h.title }}</button>
+    <p class="address">⌖ {{ h.address }}</p>
+    <div class="specs">
+      <span>{{ h.sqm }} m²</span><span>{{ h.rooms }} rooms</span><span>{{ h.bathrooms }} bath</span
+      ><span>Floor {{ h.floor }}</span>
+    </div>
+    <div class="card-bottom">
+      <span>{{
+        h.outdoor ? 'Outdoor space' : h.elevator ? 'Elevator' : 'Energy class ' + h.energy
+      }}</span
+      ><button (click)="editHome.emit(h)">Edit details ↗</button>
+    </div>
+  </div>
+</article>

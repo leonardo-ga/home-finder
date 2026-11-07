@@ -1,0 +1,13 @@
+<div #canvas class="map-canvas" aria-label="Map of shortlisted homes"></div>
+<div class="map-top">
+  <span><i></i> {{ homes.length }} homes on your radar</span>
+  <button (click)="fit()">⌖ Fit all homes</button>
+</div>
+<p class="tile-error" *ngIf="tileError()" role="status">
+  Map tiles could not be loaded. Check your internet connection. Home details remain available.
+</p>
+<div class="map-note" *ngIf="!selectedId">
+  <strong>A neighborhood. A feeling. A fresh start.</strong>
+  <span>Select a pin to take a closer look.</span>
+</div>
+<ng-content />

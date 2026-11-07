@@ -1,0 +1,51 @@
+{
+  "version": 1,
+  "projects": {
+    "home-finder": {
+      "projectType": "application",
+      "root": "",
+      "sourceRoot": "src",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:application",
+          "options": {
+            "outputPath": { "base": "docs", "browser": "" },
+            "index": "src/index.html",
+            "browser": "src/main.ts",
+            "polyfills": ["zone.js"],
+            "tsConfig": "tsconfig.json",
+            "assets": [{ "glob": ".nojekyll", "input": "public", "output": "/" }],
+            "styles": ["node_modules/leaflet/dist/leaflet.css", "src/styles.css"],
+            "allowedCommonJsDependencies": ["leaflet"]
+          },
+          "configurations": {
+            "development": {
+              "outputPath": "dist/home-finder",
+              "optimization": false,
+              "sourceMap": true,
+              "extractLicenses": false
+            },
+            "production": {
+              "baseHref": "/home-finder/",
+              "optimization": { "scripts": true, "styles": true, "fonts": false },
+              "outputHashing": "all"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "buildTarget": "home-finder:build"
+          },
+          "configurations": {
+            "development": {
+              "buildTarget": "home-finder:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        }
+      }
+    }
+  }
+}

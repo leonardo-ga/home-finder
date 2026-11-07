@@ -1,0 +1,77 @@
+import { Home, Workspace } from './home.model';
+
+const EXAMPLE_HOMES: Home[] = [
+  {
+    id: 'demo-1',
+    title: 'Light-filled apartment in Porta Venezia',
+    address: 'Porta Venezia, Milano',
+    price: 1450,
+    fees: 180,
+    sqm: 78,
+    rooms: 3,
+    bathrooms: 1,
+    floor: 3,
+    energy: 'C',
+    lat: 45.473,
+    lng: 9.205,
+    status: 'Shortlisted',
+    notes:
+      'Example home. Lovely natural light and close to the park. Check street noise during a visit.',
+    url: '',
+    photo: '',
+    elevator: true,
+    outdoor: true,
+  },
+  {
+    id: 'demo-2',
+    title: 'A quiet corner of Isola',
+    address: 'Isola, Milano',
+    price: 1650,
+    fees: 150,
+    sqm: 85,
+    rooms: 3,
+    bathrooms: 2,
+    floor: 2,
+    energy: 'B',
+    lat: 45.489,
+    lng: 9.19,
+    status: 'Visit planned',
+    notes: 'Example home. A little more space, with room for a home office.',
+    url: '',
+    photo: '',
+    elevator: true,
+    outdoor: false,
+  },
+  {
+    id: 'demo-3',
+    title: 'Cozy home by the Navigli',
+    address: 'Navigli, Milano',
+    price: 1200,
+    fees: 120,
+    sqm: 62,
+    rooms: 2,
+    bathrooms: 1,
+    floor: 1,
+    energy: 'D',
+    lat: 45.449,
+    lng: 9.174,
+    status: 'Visited',
+    notes: 'Example home. Great neighborhood. Consider the evening commute.',
+    url: '',
+    photo: '',
+    elevator: false,
+    outdoor: true,
+  },
+];
+
+export function createExampleWorkspace(): Workspace {
+  return {
+    homes: structuredClone(EXAMPLE_HOMES),
+    destinations: [
+      { name: 'Destination 1', address: '' },
+      { name: 'Destination 2', address: '' },
+    ],
+    mode: 'transit',
+    demo: true,
+  };
+}

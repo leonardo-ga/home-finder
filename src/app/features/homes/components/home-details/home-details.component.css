@@ -1,0 +1,108 @@
+:host {
+  display: block;
+}
+.map-detail {
+  position: absolute;
+  bottom: 22px;
+  left: 20px;
+  right: 65px;
+  max-height: 75%;
+  overflow: auto;
+  background: white;
+  border-radius: 12px;
+  padding: 23px;
+  box-shadow: 0 8px 30px #243d3530;
+}
+.map-detail h2 {
+  margin-top: 8px;
+  font-size: 20px;
+  padding-right: 10px;
+}
+.map-detail p {
+  color: var(--muted);
+  font-size: 12px;
+}
+.close {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  border: 0;
+  background: none;
+  padding: 3px 7px;
+  font-size: 20px;
+}
+.detail-stats {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 15px;
+}
+.detail-stats strong {
+  font-size: 20px;
+}
+.detail-stats small {
+  font-size: 10px;
+  font-weight: 400;
+}
+.detail-stats > span {
+  font-size: 11px;
+  background: var(--soft);
+  padding: 5px;
+}
+.notes {
+  white-space: pre-wrap;
+  line-height: 1.6;
+}
+.commute {
+  border-top: 1px solid var(--line);
+  padding-top: 13px;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  font-size: 12px;
+}
+.commute a {
+  display: flex;
+  justify-content: space-between;
+  text-decoration: none;
+  padding: 8px;
+  background: var(--paper);
+  border-radius: 5px;
+}
+.commute small {
+  font-size: 10px;
+  color: var(--muted);
+  line-height: 1.5;
+}
+.commute button {
+  text-align: left;
+}
+.detail-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 16px;
+  align-items: center;
+  font-size: 11px;
+}
+.detail-actions button {
+  padding: 7px 10px;
+  font-size: 11px;
+}
+.detail-actions a {
+  margin-right: auto;
+}
+@media (max-width: 760px) {
+  .map-detail {
+    left: 12px;
+    right: 55px;
+    bottom: 15px;
+    padding: 17px;
+    max-height: 75%;
+  }
+  .map-detail h2 {
+    font-size: 16px;
+  }
+  .detail-stats strong {
+    font-size: 16px;
+  }
+}
