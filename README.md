@@ -1,4 +1,4 @@
-﻿# Home Finder
+# Home Finder
 
 A read-only home catalogue and map built with Angular, TypeScript and Leaflet.
 
@@ -54,7 +54,13 @@ If the repository name or hosting path changes, update `production.baseHref` in 
 
 ## Catalogue
 
-The sole data source is [home.catalogue.ts](src/app/features/homes/domain/home.catalogue.ts). The application displays the seven selected Immobiliare.it listings, their descriptions and photos, and their positions on an interactive map. Selecting a card or pin opens the property details and original listing link.
+The sole data source is [home.catalogue.ts](src/app/features/homes/domain/home.catalogue.ts). The application displays the seven selected Immobiliare.it listings and their positions on an interactive map. Clicking anywhere on a card selects and reveals its map pin; clicking a pin reveals its card. The separate, full-width **Più dettagli** button opens the details modal without changing the map selection.
+
+The interface is in Italian; the application name remains **Home Finder**. Cards and property details also display the monthly rent per square metre, calculated as rent divided by area, excluding condominium fees and formatted to two decimal places.
+
+The compact sorting control separates the criterion (monthly total, rent per m², area, or deposit) from an ascending/descending toggle. Unknown deposits appear last in either direction, ties retain catalogue order, and **Ordine base** restores the original order. Sorting changes only the list and preserves map selection; it is temporary and is not saved in the browser.
+
+Cards show the known monthly total and rent per m²; the detailed rent/fee breakdown is in the modal. One-off deposits and agency fees are shown separately without adding a redundant first-month-plus-deposit total. Agency fees and unquantified charges remain unknown; the known total is not presented as a complete living budget. Deposit amounts come from the verified listing notes; Cucchiari's amount is calculated from its stated three monthly rents.
 
 The website has no add, edit, delete, import, or export controls. It does not read or write IndexedDB, local storage, or session storage. Any data saved by previous versions is ignored. Selection is temporary and resets on refresh.
 

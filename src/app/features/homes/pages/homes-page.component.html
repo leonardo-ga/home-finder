@@ -1,33 +1,76 @@
 <header><h1>Home Finder</h1></header>
 <main>
-  <section class="workspace" aria-label="Home catalogue and map">
+  <section class="workspace" aria-label="Catalogo e mappa degli immobili">
     <div class="listing-panel">
       <div class="list-heading">
         <h2>
-          Catalogue <span>{{ store.homes.length }}</span>
+          Catalogo <span>{{ store.homes.length }}</span>
         </h2>
+        <div class="sort-tools">
+          <select
+            class="sort-criterion"
+            aria-label="Criterio di ordinamento"
+            aria-describedby="sort-help"
+            [value]="store.sortCriterion()"
+            (change)="changeSort($event)"
+          >
+            <option *ngFor="let option of sortOptions" [value]="option.value">
+              {{ option.label }}
+            </option>
+          </select>
+          <button
+            class="sort-direction"
+            [disabled]="store.sortCriterion() === 'catalogue'"
+            (click)="toggleSortDirection()"
+            [attr.aria-label]="
+              store.sortDirection() === 'asc'
+                ? 'Ordine crescente. Passa al decrescente'
+                : 'Ordine decrescente. Passa al crescente'
+            "
+            [title]="
+              store.sortDirection() === 'asc' ? 'Dal minore al maggiore' : 'Dal maggiore al minore'
+            "
+          >
+            <svg
+              aria-hidden="true"
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              [class.descending]="store.sortDirection() === 'desc'"
+            >
+              <path d="M12 19V5M7 10l5-5 5 5" />
+            </svg>
+          </button>
+        </div>
       </div>
-      <div class="cards">
+      <span id="sort-help" class="sr-only"
+        >Costo mensile: canone e condominio. Canone al m²: spese escluse. Cauzioni non indicate
+        sempre in fondo.</span
+      >
+      <div #cardList class="cards">
         <app-home-card
-          *ngFor="let home of store.homes; let i = index; trackBy: trackHome"
+          *ngFor="let home of store.orderedHomes(); let i = index; trackBy: trackHome"
           [h]="home"
           [index]="i"
           [selected]="store.selectedId() === home.id"
-          (selectHome)="store.select($event.id)"
+          [selectedFromMap]="mapSelectionId === home.id"
+          (selectHome)="selectFromCard($event)"
+          (openDetails)="openDetails($event)"
         />
-        <div class="empty" *ngIf="!store.homes.length"><h2>No homes in the catalogue</h2></div>
+        <div class="empty" *ngIf="!store.homes.length"><h2>Nessun immobile nel catalogo</h2></div>
       </div>
     </div>
     <app-home-map
       [homes]="store.homes"
       [selectedId]="store.selectedId()"
-      (selectHome)="store.select($event)"
-    >
-      <app-home-details
-        *ngIf="store.activeHome() as home"
-        [h]="home"
-        (closeDetails)="closeDetails()"
-      />
-    </app-home-map>
+      (selectHome)="selectFromMap($event)"
+    />
   </section>
 </main>
+<p class="sr-only" aria-live="polite" aria-atomic="true">{{ selectionAnnouncement }}</p>
+<app-home-details *ngIf="detailsHome as home" [h]="home" (closeDetails)="closeDetails()" />

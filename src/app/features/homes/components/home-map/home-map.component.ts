@@ -47,10 +47,12 @@ export class HomeMapComponent implements AfterViewInit, OnChanges, OnDestroy {
         [45.468, 9.19],
         13,
       );
-      L.control.zoom({ position: 'bottomright' }).addTo(this.map);
+      L.control
+        .zoom({ position: 'bottomright', zoomInTitle: 'Ingrandisci', zoomOutTitle: 'Riduci' })
+        .addTo(this.map);
       const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution:
-          '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+          '&copy; collaboratori di <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
         maxZoom: 19,
       });
       tiles.on('tileerror', () =>
@@ -72,13 +74,33 @@ export class HomeMapComponent implements AfterViewInit, OnChanges, OnDestroy {
     this.zone.runOutsideAngular(() => {
       if (changes['homes'] || changes['selectedId']) this.renderMarkers();
       if (changes['selectedId'] && this.selectedId) {
-        const home = this.homes.find((item) => item.id === this.selectedId);
-        if (home) this.map?.flyTo([home.lat, home.lng], 14);
+        this.focusHome(this.selectedId);
       }
       if (changes['visible'] && this.visible) this.map?.invalidateSize();
       // Initial data arrives asynchronously after the map has mounted.
       if (changes['homes'] && !changes['homes'].previousValue?.length && this.homes.length)
         this.fit();
+    });
+  }
+
+  focusHome(id: string): void {
+    const home = this.homes.find((item) => item.id === id);
+    if (!home) return;
+    const reducedMotion = this.canvas.nativeElement.ownerDocument.defaultView?.matchMedia(
+      '(prefers-reduced-motion: reduce)',
+    ).matches;
+    this.zone.runOutsideAngular(() => {
+      this.map?.flyTo([home.lat, home.lng], 14, { animate: !reducedMotion });
+    });
+  }
+
+  reveal(): void {
+    const canvas = this.canvas.nativeElement;
+    const view = canvas.ownerDocument.defaultView;
+    const reducedMotion = view?.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    view?.requestAnimationFrame(() => {
+      if (canvas.isConnected)
+        canvas.scrollIntoView({ behavior: reducedMotion ? 'auto' : 'smooth', block: 'nearest' });
     });
   }
 
@@ -103,11 +125,11 @@ export class HomeMapComponent implements AfterViewInit, OnChanges, OnDestroy {
       const marker = L.marker([home.lat, home.lng], {
         icon: L.divIcon({
           className: `price-marker ${home.id === this.selectedId ? 'active' : ''}`,
-          html: `<span>${formatMoney(home.price)}</span>`,
+          html: `<span>${formatMoney(home.price + home.fees)}</span>`,
           iconSize: [85, 32],
           iconAnchor: [42, 16],
         }),
-        title: home.title,
+        title: `${home.title} — ${formatMoney(home.price + home.fees)}/mese (canone + condominio)`,
       });
       marker.on('click', () => this.zone.run(() => this.selectHome.emit(home.id)));
       marker.addTo(this.markers);

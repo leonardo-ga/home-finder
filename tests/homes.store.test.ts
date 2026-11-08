@@ -30,6 +30,17 @@ test('selection is temporary and does not carry over to another page instance', 
   assert.equal(second.homes, first.homes);
 });
 
+test('sorting preserves selection and resets for a new page instance', () => {
+  const store = new HomesStore();
+  store.select('immobiliare-134409133');
+  store.setSortCriterion('area');
+  store.toggleSortDirection();
+  assert.equal(store.orderedHomes()[0]?.sqm, 55);
+  assert.equal(store.activeHome()?.id, 'immobiliare-134409133');
+  assert.equal(store.homes, CATALOGUE_HOMES);
+  assert.equal(new HomesStore().sortCriterion(), 'catalogue');
+});
+
 test('the catalogue works without any browser storage APIs', (context) => {
   const keys = ['indexedDB', 'localStorage', 'sessionStorage'] as const;
   const previous = keys.map((key) => Object.getOwnPropertyDescriptor(globalThis, key));

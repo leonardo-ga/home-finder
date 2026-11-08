@@ -1,4 +1,4 @@
-﻿# Application architecture
+# Application architecture
 
 Home Finder is a read-only Angular catalogue with a Leaflet map. Its data is bundled with the application. There is no backend or browser persistence.
 
@@ -12,6 +12,8 @@ src/app/
       home.catalogue.ts                    Sole catalogue data source
       home.model.ts                        Read-only property model
       home.validation.ts                   Catalogue checks
+      home.costs.ts                        Known recurring and initial cost calculations
+      home.sort.ts                         Stable, non-mutating catalogue ordering
     state/
       homes.store.ts                       Catalogue access and temporary selection
     pages/
@@ -42,10 +44,15 @@ Every visitor sees the catalogue included in the deployed application. Previousl
 
 ```text
 Source catalogue -> HomesStore -> card inputs and map pins
-Card/pin selection -> HomesStore selection signal -> selected property details
+Card/pin selection -> HomesStore selection signal -> selected card and map pin
+Più dettagli -> page modal selection -> separate property details dialog
 ```
 
-The store exposes the catalogue synchronously. Its only mutable state is the selected home ID. Selection remains in memory, is scoped to the page instance, and resets when the page reloads. Unknown IDs are ignored; closing the details or pressing Escape clears selection.
+The store exposes the catalogue synchronously. Its mutable state is limited to the selected home ID and list ordering. Sorting uses a computed projection of the immutable catalogue; the map continues receiving the original records. Rankings use monthly rent plus fees, rent-only cost per m², area, or known deposits. Unknown deposits are placed last and ties preserve catalogue order. Changing order resets the list scroll position but retains selection. Selection remains in memory, is scoped to the page instance, and resets when the page reloads. Unknown IDs are ignored. Selecting a map pin scrolls its card into view, shows a selection badge, and announces the result to assistive technology. Scrolling respects reduced-motion preferences. Each card has a native map-selection button stretched over its surface and a separate details button above it. The buttons are siblings, so details clicks cannot bubble into map selection. The details button spans the card width and has a minimum 44px height. The page separately tracks the home shown in the details modal. Closing the modal leaves map selection intact.
+
+Property details use a native HTML dialog outside the map. It supplies modal focus containment and keyboard dismissal. Closing the dialog restores browser focus; its lifecycle also locks and restores background scrolling. Details can be closed with the close button, Escape, or a backdrop click.
+
+The known monthly cost is rent plus condominium fees. The deposit is optional and remains unknown when not published. The modal lists the deposit once, separately from recurring charges; it does not calculate a combined initial payment. The cost per square metre uses rent only. None of these derived values is separately persisted.
 
 The page composes the interface. Components receive typed inputs and emit selection/close events; they do not mutate the catalogue. All application components use `OnPush` change detection, and list rendering tracks stable property IDs.
 

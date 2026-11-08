@@ -16,6 +16,8 @@ Cirillo, Cosenz, and Cucchiari have elevators. The other four listings do not. P
 
 ## Source inconsistencies
 
+Deposits are recorded only where the verified listing provided them: Ruggero di Lauria €2,055, Piero della Francesca €2,100, Cirillo €2,760, and Cucchiari three monthly rents (€2,250 calculated). The remaining deposits and all agency commissions remain unquantified. The modal shows the deposit once as a one-off amount and does not derive a combined initial payment.
+
 - **Cosenz:** the live structured fields show €800 rent and €200 fees, while the description states €850 and €150. Both total €1,000. The catalogue uses the structured fields and flags the split for confirmation. Cached search results showed older amounts and were not used.
 - **Cucchiari:** the features round the area to 40 m², the description says 39 m², and the surface breakdown gives 39.6 m². The catalogue uses the 40 m² headline value and records the discrepancy. Furnishing also needs confirmation: the structured field says only the kitchen is furnished, but the description mentions bedroom furniture. The €123 fees are an estimate subject to reconciliation.
 - **Bovisasca and Rasori:** no street number is published. Their catalogue addresses intentionally omit a house number and use the listing's map pin.

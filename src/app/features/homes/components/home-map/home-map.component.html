@@ -1,9 +1,11 @@
-<div #canvas class="map-canvas" aria-label="Map of homes"></div>
+<div #canvas class="map-canvas" aria-label="Mappa degli immobili"></div>
 <div class="map-top">
-  <span><i></i> {{ homes.length }} homes</span>
-  <button (click)="fit()">⌖ Fit all homes</button>
+  <span title="Importi mensili: canone + condominio"
+    ><i></i> {{ homes.length }} {{ homes.length === 1 ? 'immobile' : 'immobili' }}</span
+  >
+  <button (click)="fit()">⌖ Mostra tutti</button>
 </div>
 <p class="tile-error" *ngIf="tileError()" role="status">
-  Map tiles could not be loaded. Check your internet connection. Home details remain available.
+  Impossibile caricare la mappa. Controlla la connessione a Internet. I dettagli degli immobili
+  restano disponibili.
 </p>
-<ng-content />

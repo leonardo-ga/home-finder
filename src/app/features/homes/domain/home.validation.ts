@@ -33,6 +33,7 @@ export function isHome(value: unknown): value is Home {
     home.address.trim().length > 0 &&
     home.price > 0 &&
     home.fees >= 0 &&
+    (home.deposit === undefined || (Number.isFinite(home.deposit) && home.deposit >= 0)) &&
     home.sqm > 0 &&
     Number.isInteger(home.rooms) &&
     home.rooms >= 1 &&

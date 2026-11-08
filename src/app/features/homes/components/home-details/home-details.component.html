@@ -1,15 +1,106 @@
-<div class="map-detail">
-  <button class="close" (click)="closeDetails.emit()" aria-label="Close home detail">×</button>
-  <h2>{{ h.title }}</h2>
-  <p>{{ h.address }}</p>
-  <div class="detail-stats">
-    <strong>{{ money(h.price + h.fees) }}<small> / mo incl. fees</small></strong
-    ><span>Energy {{ h.energy }}</span>
+﻿<dialog
+  #dialog
+  aria-labelledby="home-details-title"
+  (cancel)="cancel($event)"
+  (click)="backdropClick($event)"
+>
+  <div class="dialog-content">
+    <header>
+      <div>
+        <p class="eyebrow">DETTAGLI IMMOBILE</p>
+        <h2 id="home-details-title">{{ h.title }}</h2>
+        <p class="address">{{ h.address }}</p>
+      </div>
+      <button
+        class="close"
+        (click)="closeDetails.emit()"
+        aria-label="Chiudi i dettagli dell’immobile"
+      >
+        ×
+      </button>
+    </header>
+    <section class="cost-section" aria-labelledby="cost-title">
+      <h3 id="cost-title">Costi mensili</h3>
+      <div class="monthly-total">
+        <strong>{{ money(costs.monthly) }}<small> / mese</small></strong
+        ><span>Canone + condominio</span>
+      </div>
+      <dl class="cost-list">
+        <div>
+          <dt>Canone di affitto</dt>
+          <dd>{{ money(h.price) }}/mese</dd>
+        </div>
+        <div>
+          <dt>Spese condominiali</dt>
+          <dd>{{ money(h.fees) }}/mese</dd>
+        </div>
+        <div>
+          <dt>Canone per metro quadro</dt>
+          <dd>{{ rentPerSquareMetre(h) }}/m² al mese</dd>
+        </div>
+      </dl>
+      <p class="help">
+        Utenze e TARI non quantificate: verifica quali servizi sono inclusi. Il canone al m² esclude
+        il condominio.
+      </p>
+    </section>
+    <section aria-labelledby="entry-cost-title">
+      <h3 id="entry-cost-title">Costi iniziali</h3>
+      <dl class="cost-list">
+        <div>
+          <dt>Deposito cauzionale</dt>
+          <dd>{{ costs.deposit === null ? 'Non indicato' : money(costs.deposit) }}</dd>
+        </div>
+        <div>
+          <dt>Commissione di agenzia</dt>
+          <dd>Da verificare</dd>
+        </div>
+      </dl>
+      <p class="help">
+        Importi una tantum, separati dal totale mensile. Eventuali attivazioni e altri oneri restano
+        da verificare.
+      </p>
+    </section>
+    <section aria-labelledby="features-title">
+      <h3 id="features-title">Caratteristiche</h3>
+      <dl class="features">
+        <div>
+          <dt>Superficie</dt>
+          <dd>{{ h.sqm }} m²</dd>
+        </div>
+        <div>
+          <dt>Locali</dt>
+          <dd>{{ h.rooms }}</dd>
+        </div>
+        <div>
+          <dt>Bagni</dt>
+          <dd>{{ h.bathrooms }}</dd>
+        </div>
+        <div>
+          <dt>Piano</dt>
+          <dd>{{ h.floor }}</dd>
+        </div>
+        <div>
+          <dt>Ascensore</dt>
+          <dd>{{ h.elevator ? 'Sì' : 'No' }}</dd>
+        </div>
+        <div>
+          <dt>Classe energetica</dt>
+          <dd>{{ h.energy }}</dd>
+        </div>
+        <div>
+          <dt>Spazio esterno privato</dt>
+          <dd>{{ h.outdoor ? 'Indicato' : 'Assente o non indicato' }}</dd>
+        </div>
+      </dl>
+    </section>
+    <section aria-labelledby="description-title">
+      <h3 id="description-title">Descrizione e condizioni</h3>
+      <p class="notes">{{ h.notes }}</p>
+    </section>
+    <footer>
+      <a [href]="h.url" target="_blank" rel="noopener noreferrer">Apri l’annuncio originale ↗</a
+      ><button (click)="closeDetails.emit()">Chiudi</button>
+    </footer>
   </div>
-  <p class="notes">{{ h.notes }}</p>
-  <div class="detail-actions">
-    <a *ngIf="h.url" [href]="h.url" target="_blank" rel="noopener noreferrer"
-      >Original listing ↗</a
-    >
-  </div>
-</div>
+</dialog>

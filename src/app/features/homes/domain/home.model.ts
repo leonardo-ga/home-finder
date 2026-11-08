@@ -7,6 +7,7 @@ export interface Home {
   readonly address: string;
   readonly price: number;
   readonly fees: number;
+  readonly deposit?: number;
   readonly sqm: number;
   readonly rooms: number;
   readonly bathrooms: number;

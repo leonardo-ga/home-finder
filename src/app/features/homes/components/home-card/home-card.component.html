@@ -1,15 +1,19 @@
-<article class="home-card" [class.selected]="selected">
+<article
+  class="home-card"
+  [class.selected]="selected"
+  [attr.aria-current]="selected ? 'true' : null"
+>
   <button
-    class="home-image"
-    [class.scene-two]="index % 3 === 1"
-    [class.scene-three]="index % 3 === 2"
+    class="card-select"
     (click)="selectHome.emit(h)"
-    [attr.aria-label]="'Show ' + h.title + ' on map'"
-  >
+    [attr.aria-label]="'Mostra ' + h.title + ' sulla mappa'"
+    [attr.aria-pressed]="selected"
+  ></button>
+  <div class="home-image" [class.scene-two]="index % 3 === 1" [class.scene-three]="index % 3 === 2">
     <img
       *ngIf="h.photo && !photoFailed"
       [src]="h.photo"
-      alt="Property photo"
+      [alt]="'Foto: ' + h.title"
       (error)="photoFailed = true"
       referrerpolicy="no-referrer"
     />
@@ -19,23 +23,35 @@
       <div class="couch"></div>
       <div class="table"></div>
     </div>
-    <span class="status-tag">{{ h.status }}</span
-    ><span class="image-caption" *ngIf="!h.photo || photoFailed">No photo added</span>
-  </button>
+    <span class="selection-tag" *ngIf="selected">{{
+      selectedFromMap ? 'Selezionato dalla mappa' : 'Selezionato'
+    }}</span>
+    <span class="image-caption" *ngIf="!h.photo || photoFailed">Foto non disponibile</span>
+  </div>
   <div class="card-content">
     <div class="price-row">
-      <strong>{{ money(h.price) }}<small> / month</small></strong>
+      <strong>{{ money(h.price + h.fees) }}<small> / mese</small></strong>
     </div>
-    <button class="title-button" (click)="selectHome.emit(h)">{{ h.title }}</button>
+    <p class="price-caption">Canone + condominio</p>
+    <p class="unit-price" title="Canone mensile per metro quadro, spese condominiali escluse">
+      {{ rentPerSquareMetre(h) }}/m² al mese · spese escluse
+    </p>
+    <h3 class="home-title">{{ h.title }}</h3>
     <p class="address">⌖ {{ h.address }}</p>
     <div class="specs">
-      <span>{{ h.sqm }} m²</span><span>{{ h.rooms }} rooms</span><span>{{ h.bathrooms }} bath</span
-      ><span>Floor {{ h.floor }}</span>
+      <span>{{ h.sqm }} m²</span><span>{{ h.rooms }} {{ h.rooms === 1 ? 'locale' : 'locali' }}</span
+      ><span>{{ h.bathrooms }} {{ h.bathrooms === 1 ? 'bagno' : 'bagni' }}</span
+      ><span>Piano {{ h.floor }}</span>
     </div>
     <div class="card-bottom">
-      <span>{{
-        h.outdoor ? 'Outdoor space' : h.elevator ? 'Elevator' : 'Energy class ' + h.energy
-      }}</span>
+      <button
+        class="details-button"
+        (click)="openDetails.emit(h)"
+        [attr.aria-label]="'Più dettagli su ' + h.title"
+        aria-haspopup="dialog"
+      >
+        Più dettagli <span aria-hidden="true">↗</span>
+      </button>
     </div>
   </div>
 </article>
