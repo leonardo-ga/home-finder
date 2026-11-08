@@ -78,3 +78,7 @@ All eight live Immobiliare.it pages were rechecked in the browser on **8 Novembe
 TypeScript strict checks and Angular strict template checks are enabled. See [Architecture](documentation/architecture.md) for component boundaries and data flow.
 
 Map tiles load from OpenStreetMap, property photos from their original provider, and fonts from Google Fonts. These features require internet access; no routing service or geocoding account is required. The map retains OpenStreetMap attribution. Review the [tile usage policy](https://operations.osmfoundation.org/policies/tiles/) before broader deployment.
+
+The details dialog includes all **174 property photos** from the eight original listing galleries. Use the arrows, thumbnails, left/right keys (Home/End for the first/last photo), or swipe horizontally on touch screens. Galleries preserve original captions and image proportions, have no autoplay, and show an unavailable-image message if a provider removes a photo. Photo lists live in `home.photos.ts` alongside the catalogue.
+
+Cards also have previous/next photo buttons and an individual photo counter; browsing photos does not select a map pin or open details. In the details gallery, click the image or expand icon to open a viewport-sized viewer. It keeps the current photo, provides the same navigation, and closes with its close button or Escape. Escape closes the viewer first, returning to the details dialog and its photo button.

@@ -14,7 +14,10 @@
             "browser": "src/main.ts",
             "polyfills": ["zone.js"],
             "tsConfig": "tsconfig.json",
-            "assets": [{ "glob": ".nojekyll", "input": "public", "output": "/" }],
+            "assets": [
+              { "glob": ".nojekyll", "input": "public", "output": "/" },
+              { "glob": "favicon.svg", "input": "public", "output": "/" }
+            ],
             "styles": ["node_modules/leaflet/dist/leaflet.css", "src/styles.css"],
             "allowedCommonJsDependencies": ["leaflet"]
           },

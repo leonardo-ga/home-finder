@@ -15,11 +15,12 @@ import { Home } from '../../domain/home.model';
 import { homeCosts } from '../../domain/home.costs';
 import { formatMoney } from '../../../../shared/money';
 import { formatRentPerSquareMetre } from '../home.presentation';
+import { HomeGalleryComponent } from '../home-gallery/home-gallery.component';
 
 @Component({
   selector: 'app-home-details',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, HomeGalleryComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './home-details.component.html',
   styleUrl: './home-details.component.css',

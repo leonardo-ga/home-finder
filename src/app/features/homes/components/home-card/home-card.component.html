@@ -10,14 +10,15 @@
     [attr.aria-pressed]="selected"
   ></button>
   <div class="home-image" [class.scene-two]="index % 3 === 1" [class.scene-three]="index % 3 === 2">
-    <img
-      *ngIf="h.photo && !photoFailed"
-      [src]="h.photo"
-      [alt]="'Foto: ' + h.title"
-      (error)="photoFailed = true"
-      referrerpolicy="no-referrer"
+    <app-photo-slide
+      *ngIf="photoUrl && !photoFailed"
+      [src]="photoUrl"
+      [description]="'Foto ' + (photoIndex + 1) + ': ' + h.title"
+      [direction]="photoDirection"
+      fit="cover"
+      (imageError)="photoFailed = true"
     />
-    <div *ngIf="!h.photo || photoFailed" class="room-art">
+    <div *ngIf="!photoUrl || photoFailed" class="room-art">
       <div class="window"></div>
       <div class="plant">♧</div>
       <div class="couch"></div>
@@ -26,7 +27,26 @@
     <span class="selection-tag" *ngIf="selected">{{
       selectedFromMap ? 'Selezionato dalla mappa' : 'Selezionato'
     }}</span>
-    <span class="image-caption" *ngIf="!h.photo || photoFailed">Foto non disponibile</span>
+    <span class="image-caption" *ngIf="!photoUrl || photoFailed">Foto non disponibile</span>
+    <ng-container *ngIf="h.photos.length > 1">
+      <button
+        class="photo-arrow photo-previous"
+        (click)="changePhoto(-1)"
+        [attr.aria-label]="'Foto precedente di ' + h.title"
+      >
+        <span aria-hidden="true">‹</span>
+      </button>
+      <button
+        class="photo-arrow photo-next"
+        (click)="changePhoto(1)"
+        [attr.aria-label]="'Foto successiva di ' + h.title"
+      >
+        <span aria-hidden="true">›</span>
+      </button>
+      <span class="photo-count" aria-live="polite" aria-atomic="true"
+        >{{ photoIndex + 1 }} / {{ h.photos.length }}</span
+      >
+    </ng-container>
   </div>
   <div class="card-content">
     <div class="price-row">

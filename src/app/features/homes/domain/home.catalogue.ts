@@ -1,7 +1,8 @@
 import { Home } from './home.model';
+import { HOME_PHOTOS } from './home.photos';
 
 /** User-selected listings. Verification dates and source limitations are recorded per listing. */
-const catalogue: Home[] = [
+const catalogue: Omit<Home, 'photos'>[] = [
   {
     id: 'immobiliare-133551500',
     title: 'Bilocale in Via Ruggero di Lauria 20',
@@ -178,5 +179,5 @@ const catalogue: Home[] = [
 
 /** The source-controlled catalogue is immutable, including its records. */
 export const CATALOGUE_HOMES: readonly Home[] = Object.freeze(
-  catalogue.map((home) => Object.freeze(home)),
+  catalogue.map((home) => Object.freeze({ ...home, photos: HOME_PHOTOS[home.id] })),
 );

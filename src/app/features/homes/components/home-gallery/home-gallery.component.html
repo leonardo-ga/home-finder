@@ -1,0 +1,97 @@
+<ng-container *ngIf="!fullscreen()" [ngTemplateOutlet]="gallery" />
+<dialog
+  #viewer
+  class="viewer"
+  (keydown)="keydown($event)"
+  [attr.aria-label]="'Foto di ' + title"
+  (cancel)="closeViewer($event)"
+>
+  <header class="viewer-heading">
+    <span>{{ title }}</span
+    ><button class="viewer-close" (click)="closeViewer()" aria-label="Chiudi il visualizzatore">
+      ×
+    </button>
+  </header>
+  <ng-container *ngIf="fullscreen()" [ngTemplateOutlet]="gallery" />
+</dialog>
+<ng-template #gallery>
+  <section
+    *ngIf="photos.length"
+    class="gallery"
+    aria-label="Foto dell’immobile"
+    aria-roledescription="carosello"
+    (keydown)="keydown($event)"
+  >
+    <div
+      class="stage"
+      tabindex="0"
+      aria-label="Usa le frecce sinistra e destra per cambiare foto"
+      (touchstart)="startSwipe($event)"
+      (touchend)="endSwipe($event)"
+      (touchcancel)="cancelSwipe()"
+    >
+      <app-photo-slide
+        *ngIf="!failed().has(photos[index()].url); else unavailable"
+        [src]="photos[index()].url"
+        [description]="photos[index()].caption + ' — ' + title"
+        [direction]="direction"
+        (imageError)="imageFailed(photos[index()].url)"
+      />
+      <ng-template #unavailable
+        ><p class="unavailable" role="status">
+          Foto non disponibile. Puoi continuare a sfogliare la galleria.
+        </p></ng-template
+      >
+      <button
+        #expand
+        *ngIf="!fullscreen()"
+        class="expand-photo"
+        (click)="openViewer()"
+        aria-label="Apri le foto a schermo intero"
+        aria-haspopup="dialog"
+      >
+        <span aria-hidden="true">⛶</span>
+      </button>
+      <button
+        *ngIf="photos.length > 1"
+        class="arrow previous"
+        (click)="select(index() - 1)"
+        aria-label="Foto precedente"
+      >
+        <span aria-hidden="true">‹</span>
+      </button>
+      <button
+        *ngIf="photos.length > 1"
+        class="arrow next"
+        (click)="select(index() + 1)"
+        aria-label="Foto successiva"
+      >
+        <span aria-hidden="true">›</span>
+      </button>
+    </div>
+    <div class="caption" aria-live="polite" aria-atomic="true">
+      <span>{{ photos[index()].caption }}</span
+      ><span class="count">{{ index() + 1 }} / {{ photos.length }}</span>
+    </div>
+    <div class="thumbnails" aria-label="Scegli una foto">
+      <button
+        #thumbnail
+        *ngFor="let photo of photos; let i = index; trackBy: trackPhoto"
+        [class.active]="i === index()"
+        [attr.aria-current]="i === index() ? 'true' : null"
+        [attr.aria-label]="'Foto ' + (i + 1) + ': ' + photo.caption"
+        (click)="select(i)"
+      >
+        <span aria-hidden="true">{{ i + 1 }}</span
+        ><img
+          [src]="photo.thumbnail"
+          alt=""
+          loading="lazy"
+          decoding="async"
+          referrerpolicy="no-referrer"
+          (error)="thumbnailFailed($event)"
+        />
+      </button>
+    </div>
+  </section>
+</ng-template>

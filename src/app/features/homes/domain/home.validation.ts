@@ -46,6 +46,19 @@ export function isHome(value: unknown): value is Home {
     typeof home.elevator === 'boolean' &&
     typeof home.outdoor === 'boolean' &&
     isHttpUrl(home.url) &&
-    isHttpUrl(home.photo)
+    isHttpUrl(home.photo) &&
+    Array.isArray(home.photos) &&
+    home.photos.length > 0 &&
+    home.photos.every(
+      (photo: unknown) =>
+        isRecord(photo) &&
+        typeof photo.caption === 'string' &&
+        typeof photo.url === 'string' &&
+        photo.url.length > 0 &&
+        isHttpUrl(photo.url) &&
+        typeof photo.thumbnail === 'string' &&
+        photo.thumbnail.length > 0 &&
+        isHttpUrl(photo.thumbnail),
+    )
   );
 }

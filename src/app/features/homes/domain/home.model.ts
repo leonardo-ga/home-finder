@@ -1,6 +1,12 @@
 export const HOME_STATUSES = ['Shortlisted', 'Visit planned', 'Visited', 'Discarded'] as const;
 export type HomeStatus = (typeof HOME_STATUSES)[number];
 
+export interface HomePhoto {
+  readonly url: string;
+  readonly thumbnail: string;
+  readonly caption: string;
+}
+
 export interface Home {
   readonly id: string;
   readonly title: string;
@@ -19,6 +25,7 @@ export interface Home {
   readonly notes: string;
   readonly url: string;
   readonly photo: string;
+  readonly photos: readonly HomePhoto[];
   readonly elevator: boolean;
   readonly outdoor: boolean;
 }

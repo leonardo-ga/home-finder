@@ -65,3 +65,7 @@ All eight advertise one bathroom. The remaining structured fields match the cata
 Cosenz still has conflicting fields (EUR 800 + EUR 200) and description (EUR 850 + EUR 150), both totalling EUR 1,000. Its current description explicitly includes water and condominium charges, and excludes electricity, gas, heating, internet and TARI. Its structured contract says free-market while the description specifies a temporary 6-18 month contract requiring a reason and without automatic renewal; confirm the contract with the advertiser. Older indexed results mentioning EUR 1,050 + EUR 150, class A3 and a terrace do not describe the current live fields.
 
 Bovisasca is EUR 750 + EUR 50 on the live page; indexed EUR 850 rent is superseded. Cucchiari still has the documented area/furnishing discrepancy and estimated fees subject to reconciliation. Its three-month deposit is stated in the description even though the structured deposit field is unspecified. Unknown deposits and agency fees remain unknown.
+
+## Complete galleries imported on 8 November 2026
+
+All property photos were extracted from each live Immobiliare.it listing's `multimedia.photos` metadata, preserving source order and captions. Gallery counts: Ruggero di Lauria 24, Piero della Francesca 21, Cirillo 26, Cosenz 37, Bovisasca 34, Rasori 9, Cucchiari 13, Procaccini 10: **174 photos total**. Full-size and thumbnail URLs are stored in `home.photos.ts`; no agency logos, advertisements, videos or separate floor-plan attachments are mixed into the photo lists. Images remain hosted by the original provider.

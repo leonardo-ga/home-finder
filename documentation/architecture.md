@@ -79,3 +79,9 @@ Tests check catalogue records, immutable data, selection behavior, and operation
 ## Future changes
 
 Add editing, persistence, filters, or commute calculations only when required. Each would introduce new behavior and should have an explicit data/state boundary. In particular, adding a browser editor must not silently replace the source-controlled catalogue as the source of truth.
+
+## Photo galleries
+
+`home.photos.ts` contains the complete source photo lists, captions and thumbnail URLs for each listing. `Home.photos` is read-only; arrays and individual photo records are frozen. `HomeGalleryComponent` owns only the current slide and temporary image-error state. It is composed inside the details dialog, with circular previous/next navigation, thumbnails, keyboard arrows/Home/End and horizontal touch gestures. Escape remains owned by the native dialog. There is no autoplay. A shared photo-slide component moves outgoing and incoming images horizontally together over 360ms, following navigation direction. The next photo is decoded before replacing the current one; stale loads and interrupted animations are discarded. Reduced-motion preferences disable the movement. Only the active full-size image is rendered; thumbnails load lazily. Unavailable photos retain their place in the gallery and display an explicit fallback.
+
+The gallery uses a second native modal dialog for the viewport-sized viewer. The same gallery template and slide state are reused; only one gallery is rendered at a time. Cancel is handled on the viewer and does not dismiss the underlying details dialog. Closing restores focus to the expand button. The card has a separate temporary photo index; its photo arrows are sibling controls above the stretched map-selection button and do not emit map or detail events.
