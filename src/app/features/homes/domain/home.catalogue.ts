@@ -1,6 +1,6 @@
 import { Home } from './home.model';
 
-/** User-selected listings. Snapshot verified against Immobiliare.it on 2026-11-07. */
+/** User-selected listings. Verification dates and source limitations are recorded per listing. */
 const catalogue: Home[] = [
   {
     id: 'immobiliare-133551500',
@@ -18,7 +18,7 @@ const catalogue: Home[] = [
     lng: 9.1565,
     status: 'Shortlisted',
     notes:
-      'Arredato, con soggiorno, cucinotto separato e camera matrimoniale. Primo piano senza ascensore; riscaldamento autonomo. Nessun balcone o terrazzo. Contratto 4+4. Dati verificati il 07/11/2026; posizione pubblicata nell’annuncio, da confermare in visita.',
+      'Arredato, con soggiorno, cucinotto separato e camera matrimoniale. Primo piano senza ascensore; riscaldamento autonomo. Nessun balcone o terrazzo. Contratto 4+4. Dati verificati il 08/11/2026; posizione pubblicata nell’annuncio, da confermare in visita.',
     url: 'https://www.immobiliare.it/annunci/133551500/',
     photo: 'https://pwm.im-cdn.it/image/2029010156/cover-m-c.jpg',
     elevator: false,
@@ -40,7 +40,7 @@ const catalogue: Home[] = [
     lng: 9.1614,
     status: 'Shortlisted',
     notes:
-      'Parzialmente arredato, con cucina abitabile, balcone e bagno finestrato con vasca. Primo piano senza ascensore. Riscaldamento centralizzato; le spese indicate comprendono riscaldamento, portineria e manutenzione dello stabile. Contratto 3+2 a canone concordato. Dati verificati il 07/11/2026; posizione pubblicata nell’annuncio, da confermare in visita.',
+      'Parzialmente arredato, con cucina abitabile, balcone e bagno finestrato con vasca. Primo piano senza ascensore. Riscaldamento centralizzato; le spese indicate comprendono riscaldamento, portineria e manutenzione dello stabile. Contratto 3+2 a canone concordato. Dati verificati il 08/11/2026; posizione pubblicata nell’annuncio, da confermare in visita.',
     url: 'https://www.immobiliare.it/annunci/134409133/',
     photo: 'https://pwm.im-cdn.it/image/2049132015/cover-m-c.jpg',
     elevator: false,
@@ -62,7 +62,7 @@ const catalogue: Home[] = [
     lng: 9.1722,
     status: 'Shortlisted',
     notes:
-      'Arredato, con cucina abitabile separata, stanza giorno/notte e bagno finestrato. Primo piano con ascensore, affaccio interno e portineria. Riscaldamento autonomo, climatizzazione, lavastoviglie e lavatrice. Nessun balcone o terrazzo privato; accesso a ballatoio comune. Dati verificati il 07/11/2026; posizione pubblicata nell’annuncio, da confermare in visita.',
+      'Arredato, con cucina abitabile separata, stanza giorno/notte e bagno finestrato. Primo piano con ascensore, affaccio interno e portineria. Riscaldamento autonomo, climatizzazione, lavastoviglie e lavatrice. Nessun balcone o terrazzo privato; accesso a ballatoio comune. Dati verificati il 08/11/2026; posizione pubblicata nell’annuncio, da confermare in visita.',
     url: 'https://www.immobiliare.it/annunci/134021467/',
     photo: 'https://pwm.im-cdn.it/image/2039954519/cover-m-c.jpg',
     elevator: true,
@@ -83,7 +83,7 @@ const catalogue: Home[] = [
     lng: 9.16557,
     status: 'Shortlisted',
     notes:
-      'Arredato, con balcone, climatizzazione, lavastoviglie e lavatrice. Terzo piano con ascensore. Contratto transitorio di 6–18 mesi, non rinnovabile automaticamente. Attenzione ai costi: i campi dell’annuncio riportano €800 di canone e €200 di spese, mentre la descrizione indica €850 e €150; entrambi totalizzano €1.000/mese. Ripartizione da confermare con l’inserzionista. Dati verificati il 07/11/2026; posizione pubblicata nell’annuncio, da confermare in visita.',
+      'Arredato, con balcone, climatizzazione, lavastoviglie e lavatrice. Terzo piano con ascensore. Contratto transitorio di 6–18 mesi, non rinnovabile automaticamente. Attenzione ai costi: i campi dell’annuncio riportano €800 di canone e €200 di spese, mentre la descrizione indica €850 e €150; entrambi totalizzano €1.000/mese. Acqua e oneri condominiali inclusi secondo la descrizione; elettricita, gas, riscaldamento, internet e TARI restano a carico del conduttore. Ripartizione e contratto da confermare con l’inserzionista. Dati verificati il 08/11/2026; posizione pubblicata nell’annuncio, da confermare in visita.',
     url: 'https://www.immobiliare.it/annunci/132198580/',
     photo: 'https://pwm.im-cdn.it/image/1999221884/cover-m-c.jpg',
     elevator: true,
@@ -104,7 +104,7 @@ const catalogue: Home[] = [
     lng: 9.1604,
     status: 'Shortlisted',
     notes:
-      'Loft arredato su due livelli: zona giorno con cucina a vista e bagno al livello di ingresso, zona notte e studio al livello superiore. Primo piano senza ascensore. Riscaldamento autonomo, climatizzazione, lavastoviglie e lavatrice; posto auto/moto in cortile indicato nella descrizione. Nessun balcone o terrazzo. Civico non pubblicato. Dati verificati il 07/11/2026; posizione pubblicata nell’annuncio, da confermare in visita.',
+      'Loft arredato su due livelli: zona giorno con cucina a vista e bagno al livello di ingresso, zona notte e studio al livello superiore. Primo piano senza ascensore. Riscaldamento autonomo, climatizzazione, lavastoviglie e lavatrice; posto auto/moto in cortile indicato nella descrizione. Nessun balcone o terrazzo. Civico non pubblicato. Dati verificati il 08/11/2026; posizione pubblicata nell’annuncio, da confermare in visita.',
     url: 'https://www.immobiliare.it/annunci/132703154/',
     photo: 'https://pwm.im-cdn.it/image/2010487890/cover-m-c.jpg',
     elevator: false,
@@ -125,7 +125,7 @@ const catalogue: Home[] = [
     lng: 9.16151,
     status: 'Shortlisted',
     notes:
-      'Arredato, con soggiorno, camera matrimoniale e angolo cottura. Terzo piano senza ascensore; riscaldamento autonomo e climatizzazione. Nessun balcone o terrazzo. Civico non pubblicato. Dati verificati il 07/11/2026; posizione pubblicata nell’annuncio, da confermare in visita.',
+      'Arredato, con soggiorno, camera matrimoniale e angolo cottura. Terzo piano senza ascensore; riscaldamento autonomo e climatizzazione. Nessun balcone o terrazzo. Civico non pubblicato. Dati verificati il 08/11/2026; posizione pubblicata nell’annuncio, da confermare in visita.',
     url: 'https://www.immobiliare.it/annunci/130146018/',
     photo: 'https://pwm.im-cdn.it/image/1950906454/cover-m-c.jpg',
     elevator: false,
@@ -147,9 +147,30 @@ const catalogue: Home[] = [
     lng: 9.1659,
     status: 'Shortlisted',
     notes:
-      'Sesto piano con ascensore, affaccio interno e portineria. Cucinotto separato, bagno finestrato con vasca e ripostiglio in quota. Riscaldamento centralizzato. Le caratteristiche indicano solo cucina arredata, ma la descrizione menziona mobili nella stanza: dotazione da confermare. Superficie indicata: 40 m²; descrizione: 39 m²; dettaglio: 39,6 m². Contratto 4+4 con preavviso di 6 mesi; spese preventivate soggette a conguaglio. Spazi esterni non indicati. Dati verificati il 07/11/2026; posizione pubblicata nell’annuncio, da confermare in visita.',
+      'Sesto piano con ascensore, affaccio interno e portineria. Cucinotto separato, bagno finestrato con vasca e ripostiglio in quota. Riscaldamento centralizzato. Le caratteristiche indicano solo cucina arredata, ma la descrizione menziona mobili nella stanza: dotazione da confermare. Superficie indicata: 40 m²; descrizione: 39 m²; dettaglio: 39,6 m². Contratto 4+4 con preavviso di 6 mesi; spese preventivate soggette a conguaglio. Spazi esterni non indicati. Dati verificati il 08/11/2026; posizione pubblicata nell’annuncio, da confermare in visita.',
     url: 'https://www.immobiliare.it/annunci/133519316/',
     photo: 'https://pwm.im-cdn.it/image/2028309162/cover-m-c.jpg',
+    elevator: true,
+    outdoor: false,
+  },
+  {
+    id: 'immobiliare-130761760',
+    title: 'Monolocale in Via Giulio Cesare Procaccini 73',
+    address: 'Via Giulio Cesare Procaccini 73, Paolo Sarpi, Milano',
+    price: 865,
+    fees: 135,
+    sqm: 39,
+    rooms: 1,
+    bathrooms: 1,
+    floor: 2,
+    energy: 'D',
+    lat: 45.480737,
+    lng: 9.166608,
+    status: 'Shortlisted',
+    notes:
+      'Arredato, con angolo cottura, letto a soppalco, divano letto e cabina armadio/ripostiglio. Secondo piano con ascensore, riscaldamento centralizzato a pavimento e climatizzazione caldo/freddo. Portineria; nessun balcone o terrazzo. Cauzione non indicata. Canone in offerta, ridotto da 1.000 a 865 euro. Spese condominiali: Immobiliare.it indica 135 euro/mese, Attico.it 134; il catalogo usa il dato della fonte originale, da confermare con l’agenzia. Dati verificati direttamente su Immobiliare.it il 08/11/2026. Foto e posizione provengono dalla scheda Attico.it dello stesso immobile (riferimento W-04AP42); ingresso da confermare in visita.',
+    url: 'https://www.immobiliare.it/annunci/130761760/',
+    photo: 'https://images-1.casa.it/655x483/listing/0/c0/15/12/818050089.jpg',
     elevator: true,
     outdoor: false,
   },

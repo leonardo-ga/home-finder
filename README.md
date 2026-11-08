@@ -54,7 +54,7 @@ If the repository name or hosting path changes, update `production.baseHref` in 
 
 ## Catalogue
 
-The sole data source is [home.catalogue.ts](src/app/features/homes/domain/home.catalogue.ts). The application displays the seven selected Immobiliare.it listings and their positions on an interactive map. Clicking anywhere on a card selects and reveals its map pin; clicking a pin reveals its card. The separate, full-width **Più dettagli** button opens the details modal without changing the map selection.
+The sole data source is [home.catalogue.ts](src/app/features/homes/domain/home.catalogue.ts). The application displays the eight selected Immobiliare.it listings and their positions on an interactive map. Clicking anywhere on a card selects and reveals its map pin; clicking a pin reveals its card. The separate, full-width **Più dettagli** button opens the details modal without changing the map selection.
 
 The interface is in Italian; the application name remains **Home Finder**. Cards and property details also display the monthly rent per square metre, calculated as rent divided by area, excluding condominium fees and formatted to two decimal places.
 
@@ -66,7 +66,7 @@ The website has no add, edit, delete, import, or export controls. It does not re
 
 To add, remove, or update a home, edit the catalogue file, run the checks, and build and deploy a new version. Every browser displays the catalogue from that deployed version. Catalogue records are read-only in TypeScript and frozen at runtime.
 
-Listing details, photos, and published map positions were verified on **7 November 2026**. See [Catalogue sources](documentation/listings.md). Listings are a static snapshot and do not update automatically. Prices represent monthly rental costs in euros. Automatic commute estimates are not implemented.
+All eight live Immobiliare.it pages were rechecked in the browser on **8 November 2026** for rent, condominium fees, deposits, area, rooms, bathrooms, floor, energy class, elevator, outdoor space and description. Procaccini uses the original listing fees of EUR 135/month, rather than the EUR 134 still shown on Attico.it; its photo and coordinates come from the matching Attico.it listing. See [Catalogue sources](documentation/listings.md). Listings are a static snapshot and do not update automatically. Prices represent monthly rental costs in euros. Automatic commute estimates are not implemented.
 
 ## Development
 

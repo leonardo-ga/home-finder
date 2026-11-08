@@ -59,7 +59,7 @@ test('the catalogue works without any browser storage APIs', (context) => {
       },
     });
   const store = new HomesStore();
-  assert.equal(store.homes.length, 7);
+  assert.equal(store.homes.length, 8);
   store.select('immobiliare-133551500');
   assert.equal(store.activeHome()?.price, 685);
 });
